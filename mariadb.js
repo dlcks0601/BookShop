@@ -8,4 +8,5 @@ const connection = mariadb.createConnection({
     database: 'Bookshop',
     dateStrings: true,
 });
-return connection;
+
+module.exports = connection;

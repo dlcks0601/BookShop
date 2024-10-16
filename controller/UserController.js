@@ -8,7 +8,7 @@ dotenv.config();
 const join = (req, res) => {
     const { email, password } = req.body;
 
-    let sql = 'INSERT INTO users (email, password, salt) VALUES (?, ?,?)';
+    let sql = 'INSERT INTO users (email, password, salt) VALUES (?, ?, ?)';
 
     // 비밀번호 암호화
     const salt = crypto.randomBytes(10).toString('base64');
@@ -53,11 +53,12 @@ const login = (req, res) => {
             // 토큰 발행
             const token = jwt.sign(
                 {
+                    id: loginUser.id,
                     email: loginUser.email,
                 },
                 process.env.PRIVATE_KEY,
                 {
-                    expiresIn: '5m',
+                    expiresIn: '1m',
                     issuer: 'songa',
                 }
             );
